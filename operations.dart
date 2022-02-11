@@ -26,6 +26,10 @@ class Operations {
     return number1 % number2!;
   }
 
+  num pow() {
+    return math.pow(number1, 2);
+  }
+
   double sqrt() {
     return math.sqrt(number1);
   }

@@ -3,22 +3,41 @@ import 'dart:io';
 import 'operations.dart';
 
 void main() {
-  print("Welcome to the Calculator");
-  print("Please type in the first number:");
-  final double number1 = double.parse(stdin.readLineSync()!);
-  print(
-      "Please type in the operation you want to perform:(+,-,*,/,sqrt,mod,fac,fac)");
-  final String operation = stdin.readLineSync()!;
-  if (operation == "+" ||
-      operation == "-" ||
-      operation == "*" ||
-      operation == "/" ||
-      operation == "mod") {
-    print("Please type in the second number:");
-    final double number2 = double.parse(stdin.readLineSync()!);
-    switchCase(number1: number1, number2: number2, operation: operation);
-  } else {
-    switchCase(number1: number1, operation: operation);
+  String operation = "";
+  double number1 = 0;
+  double number2 = 0;
+  while (true) {
+    print("Welcome to the Calculator");
+    print("Please type in the first number:");
+    try {
+      number1 = double.parse(stdin.readLineSync()!);
+    } catch (e) {
+      print("Please type in a valid number");
+      continue;
+    }
+    print(
+        "Please type in the operation you want to perform:(+,-,*,/,sqrt,mod,pow,fac)");
+    print("do you want to quit?(q)");
+    operation = stdin.readLineSync()!;
+    if (operation == "q") {
+      print("by by");
+      break;
+    } else if (operation == "+" ||
+        operation == "-" ||
+        operation == "*" ||
+        operation == "/" ||
+        operation == "mod") {
+      print("Please type in the second number:");
+      try {
+        number2 = double.parse(stdin.readLineSync()!);
+      } catch (e) {
+        print("Please type in a valid number");
+        continue;
+      }
+      switchCase(number1: number1, number2: number2, operation: operation);
+    } else {
+      switchCase(number1: number1, operation: operation);
+    }
   }
 }
 
@@ -43,6 +62,9 @@ void switchCase(
       break;
     case "mod":
       print("The result is: ${operations.mod()}");
+      break;
+    case "pow":
+      print("The result is: ${operations.pow()}");
       break;
     case "fac":
       print("The result is: ${operations.fac()}");
