@@ -3,14 +3,15 @@ import 'dart:io';
 import 'operations.dart';
 
 void main() {
-  String operation = "";
-  double number1 = 0;
-  double number2 = 0;
+  String? operation, number1, number2;
+  double num1, num2;
   while (true) {
     print("Welcome to the Calculator");
     print("Please type in the first number:");
+    number1 = stdin.readLineSync();
+
     try {
-      number1 = double.parse(stdin.readLineSync()!);
+      num1 = double.parse(number1!);
     } catch (e) {
       print("Please type in a valid number");
       continue;
@@ -18,7 +19,7 @@ void main() {
     print(
         "Please type in the operation you want to perform:(+,-,*,/,sqrt,mod,pow,fac)");
     print("do you want to quit?(q)");
-    operation = stdin.readLineSync()!;
+    operation = stdin.readLineSync();
     if (operation == "q") {
       print("by by");
       break;
@@ -28,21 +29,22 @@ void main() {
         operation == "/" ||
         operation == "mod") {
       print("Please type in the second number:");
+      number2 = stdin.readLineSync();
+
       try {
-        number2 = double.parse(stdin.readLineSync()!);
+        num2 = double.parse(number2!);
       } catch (e) {
         print("Please type in a valid number");
         continue;
       }
-      switchCase(number1: number1, number2: number2, operation: operation);
+      switchCase(number1: num1, number2: num2, operation: operation);
     } else {
-      switchCase(number1: number1, operation: operation);
+      switchCase(number1: num1, operation: operation);
     }
   }
 }
 
-void switchCase(
-    {required double number1, double? number2, required String operation}) {
+void switchCase({required double number1, double? number2, String? operation}) {
   Operations operations = Operations(number1: number1, number2: number2);
   switch (operation) {
     case "+":
@@ -71,5 +73,6 @@ void switchCase(
       break;
     default:
       print("Invalid operation");
+      break;
   }
 }
