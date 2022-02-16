@@ -11,7 +11,7 @@ void main() {
     number1 = stdin.readLineSync();
 
     try {
-      num1 = double.parse(number1!);
+      num1 = double.parse(number1 ?? '');
     } catch (e) {
       print("Please type in a valid number");
       continue;
@@ -32,7 +32,7 @@ void main() {
       number2 = stdin.readLineSync();
 
       try {
-        num2 = double.parse(number2!);
+        num2 = double.parse(number2 ?? '');
       } catch (e) {
         print("Please type in a valid number");
         continue;
